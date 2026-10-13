@@ -256,6 +256,19 @@ android {
         pickFirst 'lib/armeabi-v7a/liblog.so'
         pickFirst 'lib/x86/liblog.so'
         pickFirst 'lib/x86_64/liblog.so'
+
+        // OpenCV and React Native both ship libc++_shared.so
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+        pickFirst 'lib/x86/libc++_shared.so'
+        pickFirst 'lib/x86_64/libc++_shared.so'
+
+        // In case the nprime AAR also bundles OpenCV's native lib
+        pickFirst 'lib/arm64-v8a/libopencv_java4.so'
+        pickFirst 'lib/armeabi-v7a/libopencv_java4.so'
+        pickFirst 'lib/x86/libopencv_java4.so'
+        pickFirst 'lib/x86_64/libopencv_java4.so'
+
         resources {
             excludes += "META-INF/*"
             excludes += "META-INF/spring/aot.factories"
@@ -294,6 +307,9 @@ dependencies {
     implementation("io.mosip:vcverifier-aar:1.6.0") {
         exclude group: 'org.bouncycastle', module: 'bcpkix-jdk15on'
     }
+
+    // OpenCV - required by the nprime face/liveness SDK (org.opencv.core.Mat)
+    implementation 'org.opencv:opencv:4.9.0'
 
 
     def isGifEnabled = (findProperty('expo.gif.enabled') ?: "") == "true";
