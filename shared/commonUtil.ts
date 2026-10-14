@@ -132,9 +132,12 @@ export function sleep(timeInMillSeconds = 1000) {
   return new Promise(resolve => setTimeout(resolve, timeInMillSeconds));
 }
 
-export const getMosipIdentifier = (credentialSubject: CredentialSubject) => {
-  return credentialSubject.UIN ? credentialSubject.UIN : credentialSubject.VID;
-};
+
+const NIB_DOMAIN = 'nationalinsuranceboard';
+export const getMosipIdentifier = (
+  { UIN, VID, nationalInsuranceBoard }: CredentialSubject,
+): string | undefined =>
+  UIN || VID || (nationalInsuranceBoard ? `${nationalInsuranceBoard}@${NIB_DOMAIN}` : undefined);
 
 export const isTranslationKeyFound = (
   translationKey: string,
