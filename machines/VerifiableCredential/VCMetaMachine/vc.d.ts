@@ -35,7 +35,7 @@ export interface CredentialSubject {
   addressLine1: LocalizedField[] | string;
   city: LocalizedField[] | string;
   dateOfBirth: string;
-  nationalInsuranceBoard:string;
+  nipnumber:string;
   email: string;
   fullName: LocalizedField[] | string;
   gender: LocalizedField[] | string;
