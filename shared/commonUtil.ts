@@ -135,9 +135,9 @@ export function sleep(timeInMillSeconds = 1000) {
 
 const NIP_DOMAIN = 'nipnumber';
 export const getMosipIdentifier = (
-  { UIN, VID, nationalInsuranceBoard }: CredentialSubject,
+  { UIN, VID, nipnumber }: CredentialSubject,
 ): string | undefined =>
-  UIN || VID || (nationalInsuranceBoard ? `${nationalInsuranceBoard}@${NIP_DOMAIN}` : undefined);
+  UIN || VID || (nipnumber ? `${nipnumber}@${NIP_DOMAIN}` : undefined);
 
 export const isTranslationKeyFound = (
   translationKey: string,
