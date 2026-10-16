@@ -132,14 +132,20 @@ export function sleep(timeInMillSeconds = 1000) {
   return new Promise(resolve => setTimeout(resolve, timeInMillSeconds));
 }
 
-
 const NIP_DOMAIN = 'nipnumber';
-export const getMosipIdentifier = (
-  { UIN, VID, nipNumber }: CredentialSubject,
-): string | undefined =>
-  UIN || VID || (nipNumber ? `${nipNumber}@${NIP_DOMAIN}` : undefined);
 
-export const isTranslationKeyFound = (
+export const getMosipIdentifier = (
+  credentialSubject: CredentialSubject = {} as CredentialSubject,
+): string | undefined => {
+  const { UIN, VID, nipNumber } = credentialSubject;
+  const result = (UIN || VID || (nipNumber && `${nipNumber}@${NIP_DOMAIN}`))?.toLowerCase();
+
+  if (__DEV__) console.log('getMosipIdentifier:', result);
+
+  return result;
+};
+
+  export const isTranslationKeyFound = (
   translationKey: string,
   t: (key: string) => string,
 ): boolean => {
